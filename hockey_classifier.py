@@ -38,7 +38,7 @@ class Hockey_classifier:
         if not activity_score:
             return [None, []]
         sport_score = self.sports_filter(image, min_confidence)
-        if not activity_score:
+        if not sport_score:
             return [None, [activity_score]]
         team_result = self.teams_classifier(image, min_confidence)
         if not team_result[1]:
