@@ -1,5 +1,4 @@
 # Image transfer imports
-
 from flask import Flask, request
 import json
 from PIL import Image
@@ -12,12 +11,15 @@ from flask_cors import CORS
 # Classifier import
 from hockey_classifier import Hockey_classifier
 
+# Flask app
 app = Flask(__name__)
 CORS(app)
 
+# Classes data files
 teams_filename = "hockey.txt"
 sports_filename = "sports.txt"
 
+# NHL Classifier
 classifier = Hockey_classifier(teams_filename, sports_filename)
 
 @app.route('/')
@@ -26,6 +28,9 @@ def hello():
 
 @app.route("/generate-hockey-team-label/", methods=["GET", "POST"])
 def handle_request():
+    """
+    Handles the reception of the request from the client and returns a response
+    """
     data = request.get_json()
     base64_str = data["image"]
     image_data = base64.b64decode(base64_str)
